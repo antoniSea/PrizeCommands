@@ -50,7 +50,7 @@ public class LoseWinPrizes implements Listener {
 
     // Run commands on game end
     @EventHandler
-    public void onGameEnd(RoundEndEvent e){
+    public void onGameEnd(RoundEndEvent e, Arena a){
         final Arena arena = e.getArena();
         final Collection<Player> activePlayers = playing.get(arena);
 
@@ -64,34 +64,32 @@ public class LoseWinPrizes implements Listener {
             }
 
             String winner = e.getWinnerTeam().name();
+            String Winners = String.valueOf(e.getWinners());
 
             DiscordWebhook webhook = new DiscordWebhook("\n" +
                     "https://discord.com/api/webhooks/1063774393412632596/HZxLsvDPk-29W9d8IqR_lo5y75hVjYhbaFioLQbImMqtVI6N8_YMdhJ5tSGTCj_N0Q96");
-            webhook.setContent(winner + " wygrał grę!");
-            webhook.setAvatarUrl("https://your.awesome/image.png");
-            webhook.setUsername("Speedpvp.eu");
+            webhook.setContent(arena + " wygrał grę!");
+            webhook.setAvatarUrl("https://i.ibb.co/qs5NTx5/Polish-20221124-13574211333.jpg");
+            webhook.setUsername("SpeedPvP.eu");
             webhook.setTts(true);
             webhook.addEmbed(new DiscordWebhook.EmbedObject()
-                    .setTitle("Gra bedwars - wynik")
+                    .setTitle(Winners )
                     .setDescription(winner + " wygrał grę!")
                     .setColor(Color.RED)
-                    .addField("Wynik", winner + " wygrał grę!", false)
-                    .setFooter("Speedpvp.eu", "https://i.imgur.com/3vZ7sEw.png")
-                    .setThumbnail("https://i.imgur.com/3vZ7sEw.png")
-                    .setUrl("https://i.imgur.com/3vZ7sEw.png")
-                    .setAuthor("Speedpvp.eu", "https://i.imgur.com/3vZ7sEw.png", "https://i.imgur.com/3vZ7sEw.png"));
-//                    .setDescription("Wygrał zespół " + winner)
-//                    .setColor(Color.RED));
-//                    .addField("1st Field", loser, true)
-//                    .addField("2nd Field", winner, true)
-//                    .addField("3rd Field", "No-Inline", false)
-//                    .setThumbnail("https://kryptongta.com/images/kryptonlogo.png")
-//                    .setFooter("Footer text", "https://kryptongta.com/images/kryptonlogodark.png")
-//                    .setImage("https://kryptongta.com/images/kryptontitle2.png")
-//                    .setAuthor("Author Name", "https://kryptongta.com", "https://kryptongta.com/images/kryptonlogowide.png")
-//                    .setUrl("https://kryptongta.com"));
-            webhook.addEmbed(new DiscordWebhook.EmbedObject()
-                    .setDescription("Just another added embed object!"));
+                    .addField("Wynik", Winners + " wygrał grę!", false)
+                    .setFooter("Speedpvp.eu", "https://i.ibb.co/qs5NTx5/Polish-20221124-13574211333.jpg")
+                    .setThumbnail("https://i.ibb.co/qs5NTx5/Polish-20221124-13574211333.jpg")
+                    .setUrl("https://i.ibb.co/qs5NTx5/Polish-20221124-13574211333.jpg")
+                    .setAuthor("Speedpvp.eu", "https://i.ibb.co/qs5NTx5/Polish-20221124-13574211333.jpg", "https://i.ibb.co/qs5NTx5/Polish-20221124-13574211333.jpg")
+                    .setDescription("Wygrał zespół " + winner)
+                    .setColor(Color.RED)
+                    .addField("2nd Field", winner, true)
+                    .addField("3rd Field", "No-Inline", false)
+                    .setThumbnail("https://kryptongta.com/images/kryptonlogo.png")
+                    .setFooter("Footer text", "https://kryptongta.com/images/kryptonlogodark.png")
+                    .setImage("https://kryptongta.com/images/kryptontitle2.png")
+                    .setAuthor("Author Name", "https://kryptongta.com", "https://kryptongta.com/images/kryptonlogowide.png")
+                    .setUrl("https://kryptongta.com"));
 
             try {
                 webhook.execute(); //Handle exception
